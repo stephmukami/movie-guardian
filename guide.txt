@@ -1,4 +1,5 @@
 personal guide of project
+
 git config --global user.name stephmukami
 git config --global user.email stephmukami@gmail.com
 git credential-manager erase protocol=https host=gitlab.com path=/stephmukami/repo.git
@@ -9,6 +10,7 @@ cmdkey /delete:LegacyGeneric:target=git:https://github.com
 git config --global user.name stephmukami
 git config --global user.email stephmukami@gmail.com
 git config  credential.helper ‘store’
+
 git remote add origin repolink
 git remote -v
 git init 
