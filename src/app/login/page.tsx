@@ -7,7 +7,7 @@ function page({}: Props) {
   return (
     <div>
        <Navbar/>
-       <Login/> ``
+       <Login/> 
     </div>
   )
 }
