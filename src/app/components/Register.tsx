@@ -6,112 +6,57 @@ import { toast } from "react-hot-toast"
 import Image from "next/image"
 
 export default function Register() {
-    const [data, setData] = useState({
-         firstName: '',
-         lastName: '',
-         email: '',
-         password: ''
-         })
 
-    const registerUser = async (e: { preventDefault: () => void }) => {  //e is an object with a preventDefault method that takes no arguments and returns nothing,
-    e.preventDefault()
-    axios.post('/api/register', data)
-    .then(() => setData({firstName:'',lastName:'', email:'',password:''}))
-    .then(() => toast.success('User has been registered!'))
-    .catch(() => toast.error('Something went wrong!'))
-    }
 
     return (
       <>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            
-         
+ <div className='home-container border border-blue-600 flex flex-col md:flex-row w-screen h-screen'>
 
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Register for an account
-            </h2>
-          </div>
-  
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" onSubmit={registerUser}>
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                  Name
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={data.firstName}
-                    onChange={e => setData({ ...data, firstName: e.target.value })}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    value={data.email}
-                    onChange={e => setData({ ...data, email: e.target.value })}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                    Password
-                  </label>
-                  <div className="text-sm">
-                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                      Forgot password?
-                    </a>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    value={data.password}
-                    onChange={e => setData({ ...data, password: e.target.value })}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  />
-                </div>
-              </div>
-  
-              <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Register
-                </button>
-              </div>
-            </form>
-  
-            <p className="mt-10 text-center text-sm text-gray-500">
-              Not a member?{' '}
-              <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                Start a 14 day free trial
-              </a>
-            </p>
-          </div>
-        </div>
+{/* Image Section */}
+<div className="home-container-image border border-red-200 h-screen md:w-full relative">
+  <h2 className='text-6xl text-center text-brand-red absolute top-60 left-20'>Movie Guardian</h2>
+  <img className='w-full h-full object-cover' src="./pexels1.jpg" alt="movie poster" />
+</div>
+
+{/* Form Section */}
+<div className="form-container border border-yellow-200 bg-brand-black text-brand-white md:w-full h-screen flex justify-center items-center p-8">
+  <div>
+    <h2 className='text-4xl p-4 text-center'>Create an account</h2>
+    <h3 className='text-1xl p-3 text-center'>
+      Already have an account? <span className='text-brand-red'>Log in</span>
+    </h3>
+    
+    <form className='p-4' action="">
+      {/* Names */}
+      <div className="names flex mt-8 space-x-6">
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='First name' />
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='Last name' />
+      </div>
+
+      {/* Email */}
+      <div className='mt-8'>
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="email" placeholder='Email address' />
+      </div>
+
+      {/* Password */}
+      <div className='mt-8'>
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="password" placeholder='Password' />
+      </div>
+
+      {/* Submit Button */}
+      <div className="flex justify-center mt-10">
+        <button className='bg-brand-red text-white text-center w-40 rounded h-[40px]'>Sign Up</button>
+      </div>
+    </form>
+
+    {/* Authentication Buttons */}
+    <div className="auth-buttons flex justify-center space-x-4 mt-8">
+      <button className="google-auth bg-white text-black px-4 py-2 rounded">Google</button>
+      <button className="apple-auth bg-white text-black px-4 py-2 rounded">Apple</button>
+    </div>
+  </div>
+</div>
+</div>
       </>
     )
   }
