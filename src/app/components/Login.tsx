@@ -12,7 +12,7 @@ function Login({}: Props) {
 {/* Form Section */}
 <div className="form-container border border-yellow-200 bg-brand-black text-brand-white md:w-full h-screen flex justify-center items-center p-8">
   <div>
-    <h2 className='text-4xl p-4 text-center'>Log In</h2>
+    <h2 className='text-4xl p-4 text-center'>Welcome Back</h2>
     <h3 className='text-1xl p-3 text-center'>
       No account? <span className='text-brand-red'>Sign Up</span>
     </h3>
@@ -36,11 +36,19 @@ function Login({}: Props) {
       </div>
     </form>
 
-    {/* Authentication Buttons */}
     <div className="auth-buttons flex justify-center space-x-4 mt-8">
-      <button className="google-auth bg-white text-black px-4 py-2 rounded">Google</button>
-      <button className="apple-auth bg-white text-black px-4 py-2 rounded">Apple</button>
+
+      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded">
+        <img src="./google-icon.png"  className="w-[20px] h-[20px] mr-2" alt="google icon" />
+        Google
+        </button>
+
+        <button className=" flex items-center apple-auth bg-white text-black px-4 py-2 rounded">
+        <img src="./apple-icon.png"  className="w-[20px] h-[20px] mr-2" alt="apple icon" />
+        Apple
+        </button>
     </div>
+
   </div>
 </div>
 </div>

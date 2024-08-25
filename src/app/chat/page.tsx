@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Random from '../components/Random'
+import Chat from '../components/Chat'
 
 type Props = {}
 
@@ -8,7 +8,7 @@ function page({}: Props) {
   return (
     <>
     <Navbar/>
-    <Random/>
+    <Chat/>
     </>
   )
 }

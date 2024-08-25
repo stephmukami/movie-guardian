@@ -51,8 +51,16 @@ export default function Register() {
 
     {/* Authentication Buttons */}
     <div className="auth-buttons flex justify-center space-x-4 mt-8">
-      <button className="google-auth bg-white text-black px-4 py-2 rounded">Google</button>
-      <button className="apple-auth bg-white text-black px-4 py-2 rounded">Apple</button>
+
+      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded">
+        <img src="./google-icon.png"  className="w-[20px] h-[20px] mr-2" alt="google icon" />
+        Google
+        </button>
+
+        <button className=" flex items-center apple-auth bg-white text-black px-4 py-2 rounded">
+        <img src="./apple-icon.png"  className="w-[20px] h-[20px] mr-2" alt="apple icon" />
+        Apple
+        </button>
     </div>
   </div>
 </div>
