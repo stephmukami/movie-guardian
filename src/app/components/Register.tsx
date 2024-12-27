@@ -67,8 +67,17 @@ export default function Register() {
       lastName: '',
       email: '',
       password: '',
-    })).then(()=>{
+    }))
+    .then(
+      ()=>{
+        toast.success('Successfully Registered! ', {
+          duration: 3000,})
+  })
+    .then(()=>{
       router.push("/login")
+    }).catch(()=>{
+      toast.error('Error, please try again ',{
+        duration: 3000,})
     })
 
   }

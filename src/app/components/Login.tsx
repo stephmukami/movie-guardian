@@ -1,12 +1,80 @@
+'use client'
 import React from 'react'
 import Link from 'next/link'
+import axios from 'axios'
+import { useState } from 'react'
+import { toast } from "react-hot-toast"
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 type Props = {}
 
 function Login({}: Props) {
+
+  const router = useRouter();
+
+  const [formInfo,setformInfo] = useState({
+    email:"",
+    password:""
+  });
+
+  const [formError,setFormError] = useState({
+    email:"",
+    password:""
+  })
+
+  const handleChange =(e:{target:{name:any;value:any}})=>{
+    setformInfo({
+      ...formInfo,
+      [e.target.name]:e.target.value
+    })
+  }
+
+  const handleSubmit = async(e:{preventDefault:()=>void})=>{
+    e.preventDefault();
+
+    let inputError = {
+       email:"",
+    password:""
+    }
+
+    if(!formInfo.email && !formInfo.password){
+      setFormError(
+        {
+        ...inputError,
+        email:"Enter valid email address",
+        password:"Enter valid password"
+        }
+        
+      );
+      return
+    }
+    //confirm why we have
+    signIn('credentials',{
+      ...formInfo,
+      redirect:false
+    }).then(
+      async(callback) =>{
+        if(callback?.error){
+          toast.error("Wrong Credentials",{
+            duration:3000
+          });
+          console.log(callback?.error);
+        }
+        else if(callback?.ok){
+          toast.success("Successful Login",{
+            duration:3000
+          });
+          router.push('/')
+        }
+      }
+    )
+
+  }
+
+
   return (
    <>
     <div className='home-container border border-blue-600 flex flex-col md:flex-row w-screen h-screen'>
-
 
 
 {/* Form Section */}
@@ -20,17 +88,20 @@ function Login({}: Props) {
       </Link> 
     </h3>
     
-    <form className='p-4' action="">
+    <form className='p-4' action="" onSubmit={handleSubmit}>
     
 
       {/* Email */}
       <div className='mt-8 w-[400px]'>
-        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="email" placeholder='Email address' />
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="email" placeholder='Email address' name="email" value={formInfo.email} onChange={handleChange} />
+      {formError.email &&(<p> {formError.email}</p>)}
       </div>
 
       {/* Password */}
       <div className='mt-8'>
-        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="password" placeholder='Password' />
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="password" placeholder='Password' name="password" value={formInfo.password} onChange={handleChange} />
+        {formError.password &&(<p> {formError.password}</p>)}
+
       </div>
 
       {/* Submit Button */}
