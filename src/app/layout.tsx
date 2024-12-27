@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
+
+import ToasterContext from "./context/ToasterContext";
+import AuthProvider from "./context/AuthContext";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Movie Gurdian",
+  title: "Movie Guardian",
   description: "the app to pick your next cinematic experience",
 };
 
@@ -18,8 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <Toaster position="bottom-center" />
+      <AuthProvider>
+        <ToasterContext/>
         {children}
+        </AuthProvider>
       </body>
     </html>
   );

@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
             //end of autjorize func
         }),  
     ],
-    secret: process.env.SECRET || "a-default-secret", // Replace with a default secret if needed
+    secret: process.env.SECRET,
     session: {
         strategy: "jwt" as const,
     },
