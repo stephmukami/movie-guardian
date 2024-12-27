@@ -32,7 +32,7 @@ function Navbar({}: Props) {
       </div>
       </Link>
 
-      <Link href= "/watch-list">
+      <Link href= "/watchlist">
       <div className=" flex items-center justify-center circle-3  h-8 w-8  md:w-12 md:h-12 rounded-full bg-brand-grey">
       <img className= "h-[16px] w-[16px] md:h-[28px] md:w-[28px]"  src="./lib-icon.png" alt=" collection icon" />
       </div>

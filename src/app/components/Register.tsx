@@ -1,28 +1,32 @@
 'use client';
 
-import { useState } from "react"
+import React, { useState } from "react"
 import axios from "axios"
 import { toast } from "react-hot-toast"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 
 export default function Register() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName:'',
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
-
+   
   });
+
 
    //state for handling error
    const [formError, setFormError] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    firstName: "",
+    lastName:""
   });
 
+  //test with (e: ChangeEvent<HTMLInputElement>)
   const handleChange = (e: { target: { name: any; value: any } }) => {
     setFormData({
       ...formData,
@@ -34,81 +38,41 @@ export default function Register() {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    let inputError = {
+    //using an object to accumulate changes and ommit re-renders for each updating of state
+    let inputError = { 
       email: "",
       password: "",
-      confirmPassword: "",
+      firstName: "",
+      lastName:""
     };
 
-    if (!formData.email && !formData.password) {
+    if (!formData.email && !formData.password &&!formData.firstName && !formData.lastName) {
       setFormError({
         ...inputError,
         email: "Enter valid email address",
         password: "Password should not be empty",
+        firstName: "Enter your first name",
+        lastName: "Enter your last name"
       });
       return
     }
-
-    if (!formData.email) {
-      setFormError({
-        ...inputError,
-        email: "Enter valid email address",
-      });
-      return
-    }
-
-    if (formData.confirmPassword !== formData.password) {
-      setFormError({
-        ...inputError,
-        confirmPassword: "Password and confirm password should be same",
-      });
-      return;
-    }
-
-    if (!formData.password) {
-      setFormError({
-        ...inputError,
-        password: "Password should not be empty",
-      });
-      return
-    }
+ 
 
     setFormError(inputError);
+    //have toaster return item after posting to api
 
-    axios
-      .post("/api/registerApi", formData)
+    axios.post("./api/register",formData).then(()=>
+    setFormData({
+      firstName:'',
+      lastName: '',
+      email: '',
+      password: '',
+    })).then(()=>{
+      router.push("/login")
+    })
+
+  }
   
-      .then(() =>
-        toast(" ✅ Successful Registration ! Proceed to login🎉", {
-          duration: 5000,
-          style: {},
-          className: "",
-
-          ariaProps: {
-            role: "status",
-            "aria-live": "polite",
-          },
-
-        })
-
-      )
-      .catch(() => toast("Sorry, Something went wrong😔!", {
-        duration: 5000,
-        // Styling
-        style: {},
-        className: "",
-
-        ariaProps: {
-          role: "status",
-          "aria-live": "polite",
-        },
-      })
-     );
-  };
-
-  
-  
-
 
 return (
       <>
@@ -134,18 +98,21 @@ return (
       
       {/* Names */}
       <div className="names flex mt-8 space-x-6">
-        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='First name' name="firstName" value = {formData.firstName} onChange={handleChange} />
-        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='Last name' name= "lastName" value = {formData.lastName} onChange={handleChange} />
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='First name' name="firstName" required value = {formData.firstName} onChange={handleChange} />
+        <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="text" placeholder='Last name' name= "lastName" required value = {formData.lastName} onChange={handleChange} />
       </div>
 
       {/* Email */}
       <div className='mt-8'>
         <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="email" placeholder='Email address'name="email" value = {formData.email} onChange={handleChange} />
+        {formError.email && <p>{formError.email}</p>}
+
       </div>
 
       {/* Password */}
       <div className='mt-8'>
         <input className="w-full text-center bg-brand-grey placeholder-white text-white px-4 py-2 rounded-lg" type="password" placeholder='Password'name="password" value = {formData.password} onChange={handleChange} />
+      {formError.password && <p>{formError.password}</p>}
       </div>
 
       {/* Submit Button */}
@@ -167,6 +134,9 @@ return (
         Apple
         </button>
     </div>
+
+   
+
   </div>
 </div>
 </div>

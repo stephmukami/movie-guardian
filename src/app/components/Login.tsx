@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Link from 'next/link'
 type Props = {}
 
 function Login({}: Props) {
@@ -14,7 +14,10 @@ function Login({}: Props) {
   <div>
     <h2 className='text-4xl p-4 text-center'>Welcome Back</h2>
     <h3 className='text-1xl p-3 text-center'>
-      No account? <span className='text-brand-red'>Sign Up</span>
+      
+      No account? <Link href="/sign-up">
+      <span className='text-brand-red'>Sign Up</span>
+      </Link> 
     </h3>
     
     <form className='p-4' action="">

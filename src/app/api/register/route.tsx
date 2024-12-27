@@ -7,7 +7,7 @@ export async function POST(request: { json: any }){
     const body = await request.json();
     const { firstName, email, password, lastName } = body;
 
-    if(!firstName || !email || !password) {
+    if(!firstName || !email || !password ||!lastName) {
         return new NextResponse('Missing Fields', { status: 400 })
     }
 
