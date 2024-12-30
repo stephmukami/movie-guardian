@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-
+import { signIn } from "next-auth/react";
 export default function Register() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -133,7 +133,7 @@ return (
     {/* Authentication Buttons */}
     <div className="auth-buttons flex justify-center space-x-4 mt-8">
 
-      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded">
+      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded"  onClick={() => signIn("google")}>
         <img src="./google-icon.png"  className="w-[20px] h-[20px] mr-2" alt="google icon" />
         Google
         </button>

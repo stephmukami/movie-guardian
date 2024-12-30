@@ -1,11 +1,16 @@
+'use client'
 import React from 'react'
-
+import { useSession } from 'next-auth/react'
 type Props = {}
 
+
 function HomeContent({}: Props) {
+  const {data:session} = useSession();
+
+
   return (
     <div className='home-parent-div bg-brand-black min-h-screen flex flex-col justify-center items-center pb-6'>
-        <h3 className=' text-center text-[50px] text-brand-red mb-4'>Hello Explorer!</h3>
+        <h3 className=' text-center text-[50px] text-brand-red mb-4'>  Hello { session?.user?.name || 'Explorer'}!</h3>
         <div className="graphic border h-60 w-5/6 mb-8 "> graphic here</div>
 
         <div className="navigation-btns flex flex-col sm:flex-row sm:space-x-60 space-y-6 sm:space-y-0">
