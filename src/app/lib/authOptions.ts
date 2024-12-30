@@ -66,5 +66,12 @@ export const authOptions: NextAuthOptions = {
         }
         return { ...token, ...user };
       },
+      signIn: async ({ user, account, profile }) => {
+        if (account?.provider === "google") {
+          return true; // Allows the sign in
+        }
+        return true; // Don't forget to return true for other providers
+      },
+    
     },
   };

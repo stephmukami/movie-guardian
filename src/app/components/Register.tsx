@@ -133,7 +133,31 @@ return (
     {/* Authentication Buttons */}
     <div className="auth-buttons flex justify-center space-x-4 mt-8">
 
-      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded"  onClick={() => signIn("google")}>
+      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded" 
+      onClick={async () => {
+        try {
+          const result = await signIn("google", { 
+            redirect: false,
+            callbackUrl: "/login" 
+          });
+          
+          if (result?.error) {
+            toast.error('Failed to sign in with Google', {
+              duration: 3000,
+            });
+          } else if (result?.ok) {
+            toast.success('Successfully signed in with Google!', {
+              duration: 3000,
+            });
+            router.push(result.url || "/dashboard");
+          }
+        } catch (error) {
+          toast.error('Something went wrong, please try again', {
+            duration: 3000,
+          });
+        }
+      }}
+        >
         <img src="./google-icon.png"  className="w-[20px] h-[20px] mr-2" alt="google icon" />
         Google
         </button>

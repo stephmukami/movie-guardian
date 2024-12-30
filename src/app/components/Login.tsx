@@ -70,6 +70,49 @@ function Login({}: Props) {
     )
 
   }
+//handling login via google
+// signIn('credentials', {
+//   ...formInfo,
+//   redirect: false
+// }).then((callback) => {
+//   if(callback?.error) {
+//     toast.error("Wrong Credentials", {
+//       duration: 3000
+//     });
+//   } else if(callback?.ok) {
+//     toast.success("Successful Login", {
+//       duration: 3000
+//     });
+//     router.push('/');
+//   }
+// });
+// }
+
+const handleGoogleSignIn = async () => {
+try {
+  const result = await signIn('google', { 
+    redirect: false,
+    callbackUrl: '/' // or your desired redirect path
+  });
+  
+  if (result?.error) {
+    toast.error('Failed to sign in with Google', {
+      duration: 3000
+    });
+  } else if (result?.ok) {
+    toast.success('Successfully signed in with Google!', {
+      duration: 3000
+    });
+    router.push(result.url || '/');
+  }
+} catch (error) {
+  toast.error('Something went wrong, please try again', {
+    duration: 3000
+  });
+}
+};
+
+
 
 
   return (
@@ -112,7 +155,9 @@ function Login({}: Props) {
 
     <div className="auth-buttons flex justify-center space-x-4 mt-8">
 
-      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded">
+      <button className=" flex items-center google-auth bg-white text-black px-4 py-2 rounded"
+      onClick={handleGoogleSignIn}
+      >
         <img src="./google-icon.png"  className="w-[20px] h-[20px] mr-2" alt="google icon" />
         Google
         </button>
