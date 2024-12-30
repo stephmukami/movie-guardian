@@ -48,7 +48,6 @@ function Login({}: Props) {
       );
       return
     }
-    //confirm why we have
     signIn('credentials',{
       ...formInfo,
       redirect:false
