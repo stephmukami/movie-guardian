@@ -162,10 +162,7 @@ return (
         Google
         </button>
 
-        <button className=" flex items-center apple-auth bg-white text-black px-4 py-2 rounded">
-        <img src="./apple-icon.png"  className="w-[20px] h-[20px] mr-2" alt="apple icon" />
-        Apple
-        </button>
+       
     </div>
 
    
