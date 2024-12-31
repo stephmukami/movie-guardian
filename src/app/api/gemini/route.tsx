@@ -6,6 +6,13 @@ dotenv.config();
 
 const apiKey = process.env.GEMINI_API_KEY;
 
+const generationConfig = {
+  stopSequences:["red"],
+  temperature:0.9,
+  topP:0.1,
+  topK:16,
+};
+
 if (!apiKey) {
   throw new Error("GEMINI_API_KEY is not defined");
 }
@@ -18,8 +25,9 @@ export async function POST(request:NextRequest){
       return NextResponse.json({error:"Must have a valid chat question"},{status:500})  
     }
     try{
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const result = await model.generateContent(chatQuestion);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash",generationConfig });
+        const finalPrompt = `Summarize the following in under 300 tokens in text:${chatQuestion}`;
+        const result = await model.generateContent(finalPrompt);
         const response = await result.response;
         const text = response.text();
         return NextResponse.json({chatResponse:text},{status:200});

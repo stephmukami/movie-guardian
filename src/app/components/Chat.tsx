@@ -3,6 +3,8 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 type Props = {}
 
 function Chat({}: Props) {
@@ -47,7 +49,7 @@ function Chat({}: Props) {
  }
   return (
     <>
-        <div className='parent-div bg-brand-black p-4 h-screen  '>
+        <div className='parent-div bg-brand-black p-6 min-h-screen  '>
         <h2 className='text-white md:text-4xl text-3xl ml-6 mb-[100px]'> Give an idea and I'll suggest sth to watch 😊 </h2>
 
         <div className="flex flex-col justify-center items-center md:space-y-32 space-y-14">
@@ -61,6 +63,11 @@ function Chat({}: Props) {
                 name= "chatQuestion"
                 value = {chat.chatQuestion}
                 onChange={handleChange}
+                onKeyDown={(e)=>{
+                  if (e.key==="Enter"){
+                    handleSubmit(e)
+                  }
+                }}
               />
 
             </div>
@@ -74,11 +81,11 @@ function Chat({}: Props) {
           </div>
              
 
-                <div className=' w-4/6 border border-brand-grey rounded-md h-[100px]  '>
-                <p className="text-white">
-                  {chatAnswer.chatResponse || "Your answer will appear here"}
+                <div className=' w-4/6 border border-brand-grey rounded-md min-h-[100px] p-3 font-thin '>
+                <ReactMarkdown className="text-white" remarkPlugins={[remarkGfm]}>
+                  {chatAnswer.chatResponse || 'Your answer will appear here'}
+                </ReactMarkdown>
 
-                </p>
                 </div>
         </div>
         </div>
