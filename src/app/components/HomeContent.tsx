@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 type Props = {}
 
 
@@ -19,8 +20,12 @@ function HomeContent({}: Props) {
       <div className=" flex items-center justify-center circle-2   w-16 h-16 rounded-full bg-brand-grey mb-2">
       <img className="h-[30px] w-[30px]"  src="./dice-icon.png" alt="" />
       </div>
+ <Link href="">
+ </Link>
 
-      <h4 className='text-brand-red text-2xl mb-2'>Random Roll </h4>
+      <Link href="/random-roll">
+        <h4 className='text-brand-red text-2xl mb-2'>Random Roll </h4>
+      </Link>
       <div className="card1 bg-brand-grey text-center w-60 h-40 p-6 text-white rounded-md">
         <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, exercitationem.</h5>
       </div>
@@ -33,7 +38,9 @@ function HomeContent({}: Props) {
         <img className="h-[30px] w-[30px]"  src="./lib-icon.png" alt="" />
     </div>
 
-    <h4 className='text-brand-red text-2xl mb-2'> Watch List </h4>
+      <Link href="/watchlist">
+        <h4 className='text-brand-red text-2xl mb-2'> Watch List </h4>
+      </Link>
     <div className="card1 bg-brand-grey text-center w-60 h-40 p-6 text-white rounded-md">
         <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, exercitationem.</h5>
     </div>
@@ -44,8 +51,10 @@ function HomeContent({}: Props) {
     <div className=" flex items-center justify-center circle-2   w-16 h-16 rounded-full bg-brand-grey mb-2">
         <img className="h-[30px] w-[30px]"  src="./chat-2-icon.png" alt="" />
     </div>
-
-    <h4 className='text-brand-red text-2xl mb-2'> Get Suggestion </h4>
+    
+    <Link href="/chat">
+      <h4 className='text-brand-red text-2xl mb-2'> Get Suggestion </h4>
+    </Link>
     <div className="card1 bg-brand-grey text-center w-60 h-40 p-6 text-white rounded-md">
         <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, exercitationem.</h5>
     </div>
