@@ -19,6 +19,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  savedMovies SavedMovie[]
 }
 
 model Account {
@@ -55,4 +56,11 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-// movie schema -> for each block has uuid, linked to a user/ account ie email and has date of creation
+model SavedMovie{
+id String @id @default(uuid())
+createdAt DateTime @default(now())
+userEmail String
+movies String[]
+user User @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+
+}
