@@ -1,34 +1,23 @@
-import {prisma} from '@/app/lib/prisma'
-import { NextResponse } from 'next/server';
+// import { prisma } from '@/app/lib/prisma';
+// import { NextResponse } from 'next/server';
 
-export  async function PUT(request: Request){
+// export async function PUT(request: Request) {
+//   try {
+//     const body = await request.json();
+//     const { id, movie } = body;
 
-    
-    try{
-        const body = await request.json();
-        const{id,movies} = body;
+//     if (!id || !movie) {
+//       return NextResponse.json({ error: 'Invalid data' }, { status: 400 });
+//     }
 
-        if(!id||!movies){
-            console.error("Enter valid info");
-            return NextResponse.json({error:"No details passed"},{status:500}); 
-      
-        }
+//     const updatedCard = await prisma.savedMovie.update({
+//       where: { id },
+//       data: { movie }, // Update the single movie string
+//     });
 
-        const updatedCard = await prisma.savedMovie.update({
-            where:{id},
-            data: {
-                movies: {
-                    push: movies, // Append new text to existing array
-                },
-            }
-        });
-
-      
-
-        console.log("Card Updated Successfully",updatedCard);
-        return NextResponse.json({updatedCard},{status:200});
-
-    }catch(error){
-        console.error("Errror updating card",error);
-    }
-}
+//     return NextResponse.json({ updatedCard }, { status: 200 });
+//   } catch (error) {
+//     console.error('Error updating card:', error);
+//     return NextResponse.json({ error: 'Failed to update card' }, { status: 500 });
+//   }
+// }
